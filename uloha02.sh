@@ -22,11 +22,8 @@ elif [ "$1" == "--reverse" ]; then
     rm tmp
     
 elif [ "$1" == "--subst" ]; then
-    a=$2
-    b=$3
-    shift 3
-    for i in "$@"; do
-	echo "${i//$a/$b}"
+    for i in "${@:4}"; do
+	echo "${i//$2/$3}"
     done
 
 elif [ "$1" == "--len" ]; then

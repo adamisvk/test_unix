@@ -1,0 +1,14 @@
+shift - shift neposunul parametre, pretoze posun bol vacsi ako pocet ostavajucich parametrov
+      - z man - The value n shall be an unsigned decimal integer <b>less than or equal</b> to the value of the special parameter '#'.
+
+$# - pocet argumentov
+${#var} - dlzka (stringu)
+${!var} - odkaz na premennu (zavola sa prememnna s nazvom, ktory je ulozeny vo var)
+${premenna:-vyraz}  - priradi to premennej hodnotu ak neexistuje(vyraz)
+		    - ak premenna existuje, hodnotu nezmeni
+${var:n} - vrati obsah premennej od n+1. znaku
+${var:m:n} - vrati obsah premennej - n znakov od m+1. znaku
+${parameter/pattern/string} - najde pattern v parametri a vymeni ho za string (vymeni iba prvu zhodu)
+${parameter//pattern/string} - najde patren v parametri a vymeni ho za string (vsetky zhody)
+Može hocikde byť ako premenna použítý @, tak ako v f7 a f8? 
+    - Nie, napr. ak pouzijeme ${@:4:2} tak nam to vrati 5. a 6. parameter, neskrati vsetky parametre na 5. a 6. znak
