@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ "$1" == "-l" -o "$1" == "--lines" ]; then
+    first=`echo "$2" | cut -f1 -d'-'`
+    second=`echo "$2" | cut -f2 -d'-'`
+    out=`cat < "${3:-/dev/stdin}" | head -n "+$second" | tail -n "+$first"`
+    
+    echo "$out"
+elif [ "$1" == "-f" -o "$1" == "--fraction" ]; then
+    a=`echo "$2" | cut -f1 -d'/'`
+    b=`echo "$2" | cut -f2 -d'/'`
+    c=`echo "$3" | cut -f1 -d'/'`
+    d=`echo "$3" | cut -f2 -d'/'`
+    input=`cat < "${4:-/dev/stdin}"`
+    lines=`echo "$input" | wc -l`
+    first=$(($a * $lines / $b))
+    second=$(($c * $lines / $d))
+    out=`echo "$input" | head -n "+$second" | tail -n "+$first"`
+    
+    echo "$out"
+elif [ "$1" == "-p" -o "$1" == "--part" ]; then
+    a=`echo "$2" | cut -f1 -d'/'`
+    b=`echo "$2" | cut -f2 -d'/'`
+    input=`cat < "${3:-/dev/stdin}"`
+    lines=`echo "$input" | wc -l`
+    part=$((($lines + 1) / $b))
+    first=$((($a - 1) * $part + 1))
+    second=$(($part + $first - 1))
+    out=`echo "$input" | head -n "+$second" | tail -n "+$first"`
+    
+    echo "$out"
+fi
