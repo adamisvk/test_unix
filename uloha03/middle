@@ -23,7 +23,7 @@ elif [ "$1" == "-p" -o "$1" == "--part" ]; then
     b=`echo "$2" | cut -f2 -d'/'`
     input=`cat < "${3:-/dev/stdin}"`
     lines=`echo "$input" | wc -l`
-    part=$((($lines + 1) / $b))
+    part=$((($lines + $b -1) / $b))
     first=$((($a - 1) * $part + 1))
     second=$(($part + $first - 1))
     out=`echo "$input" | head -n "+$second" | tail -n "+$first"`
