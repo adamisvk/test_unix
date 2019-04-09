@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" == "-n" ]; then    
+    input=`cat < "${3:-/dev/stdin}"`
+    lines=`echo "$input" | wc -l`
+    for (( i=$lines; i >=1; i-=$2))
+    do
+	first=$(($i - $2 + 1))
+	if [ "$first" -lt 1 ]; then
+		first=1
+		fi
+	echo "$input" | ./middle -l "$first-$i"
+	#echo "$first-$i"
+    done 
+fi
