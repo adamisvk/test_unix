@@ -20,8 +20,7 @@ BEGIN {
 		}
 		else if ( $o ~ /href\s*=/){
 			gsub(/.*href\s*=/, "", $o)
-			#POZOR NA TOTO
-			gsub(/(\s|>).*/, "", $o)
+			gsub(/(\s|>|").*/, "", $o)
 			gsub("&quot;", "\"", $o)
 			gsub("&lt;", "<", $o)
 			gsub("&gt;", ">", $o)
